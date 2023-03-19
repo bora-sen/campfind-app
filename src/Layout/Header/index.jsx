@@ -1,13 +1,29 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
-import { NavLink } from 'react-router-dom'
-function Header() {
-  const {user} = useSelector(store => store.auth)
+import React, { useContext } from 'react'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { authContext } from '../../Context/auth';
 
+import { SignOut } from '../../Firebase/controller';
+
+function Header() {
+  const {user,deleteUserFromLocalStorage} = useContext(authContext);
+  const navigate = useNavigate();
+
+
+  async function handleSignOut(e){
+    e.preventDefault();
+
+    try {
+      await SignOut();
+      deleteUserFromLocalStorage();
+      navigate(0);
+    } catch (error) {
+      console.log(error);
+    }
+  }
   return (
     <nav className='flex justify-between p-8'>
       <div className='flex items-center'>
-        <NavLink replace to="/"><h1 className='font-bold md:text-4xl'>campFind</h1></NavLink>
+        <NavLink replace to="/"><h1 className='font-bold text-5xl'>campFind</h1></NavLink>
         <span className='hidden font-bold text-gray-400'>Home</span>
       </div>
       <div className='md:hidden'>
@@ -23,8 +39,8 @@ function Header() {
           </>
           :
           <>
-            <span>{user.name}</span>
-            <button onClick={e => console.log(e)}>Sign Out</button>
+            <span>{user.displayName}</span>
+            <button onClick={e => handleSignOut(e)}>Sign Out</button>
           </>
         }
 
