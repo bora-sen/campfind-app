@@ -1,29 +1,26 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import * as Assets from '../Landing/Assets'
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { useDispatch } from 'react-redux';
-import { login } from '../../Store/auth';
+import {Login} from '../../Firebase/controller'
+import { authContext } from '../../Context/auth';
 
 function SignIn() {
   const navigate = useNavigate();
-  const dispatch = useDispatch()
+  const {saveUserToLocalStorage} = useContext(authContext);
 
-  //TODO: Add register
   async function handleSubmit(e){
     e.preventDefault();
     let username = document.querySelector('#input-username').value;
     let password = document.querySelector('#input-password').value;
-    //console.log("login attempt",{username,password});
 
     try {
-      let resp = await axios.post('http://localhost:4000/api/v1/auth/login',{username,password});
-      //console.log(resp.data);
-      dispatch(login(resp.data))
+      const resp = await Login(username,password);
+      console.log(resp);
+      saveUserToLocalStorage(resp.user)
       navigate("/camps",{replace:true})
     } catch (error) {
-      console.log(error);
+      console.log(error.code);
     }
 
 

@@ -1,16 +1,14 @@
 import React, { useState } from 'react'
-import axios from 'axios'
 import { useEffect } from 'react';
 import CampCard from '../CampCard';
+import { getAllCampgrounds } from '../../../../Firebase/controller';
 
 export default function CampCardList() {
   const [camps,setCamps] = useState([])
 
   async function getCamps(){
     try{
-      const req = await axios.get('http://localhost:4000/api/v1/campgrounds');
-      const res = await req;
-      const Camps = res.data;
+      const Camps = await getAllCampgrounds();
       //console.log(Camps);
       setCamps(Camps)
     }catch(err){

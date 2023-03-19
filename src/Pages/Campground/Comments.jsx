@@ -1,33 +1,15 @@
-import axios from 'axios';
-import React from 'react'
-import { useSelector } from 'react-redux';
+import React, { useContext } from 'react'
+import { authContext } from '../../Context/auth';
 
-function Comments({campgroundObj,comments}) {
-  const {user} = useSelector(store => store.auth)
+function Comments({comments}) {
+  const {user} = useContext(authContext);
 
 
   async function handleAddComment(e){
     e.preventDefault();
+    
     try {
-      let newComment = document.getElementById('add-comment-text').value;
-      console.log(newComment);
-      console.log(campgroundObj._id);
-      const reqConfig = {
-        headers:{
-          Authorization:`Bearer ${user.accessToken}`
-        }
-      }
-  
-      const reqData = {
-        campgroundId:campgroundObj._id,
-        title:newComment
-      }
-      console.log(reqData);
-  
-      const resp = await axios.post('http://localhost:4000/api/v1/add-comment',reqData,reqConfig);
-      if(resp.status === 200) console.log("Your Comment is Added!");
-      console.log(resp);
-
+      console.log("handled");
     } catch (error) {
       console.log(error);
     }

@@ -1,13 +1,29 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import * as Assets from '../Landing/Assets'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { SignUp as FireBaseSignUp } from '../../Firebase/controller';
+import { authContext } from '../../Context/auth';
 
 function SignUp() {
-  function handleSubmit(e){
-    e.preventDefault();
-    let username = document.querySelector('#input-username').value;
-    let password = document.querySelector('#input-password').value;
-    console.log({username,password});
+  const navigate = useNavigate();
+  const {saveUserToLocalStorage} = useContext(authContext);
+  async function handleSubmit(e){
+    try {
+      e.preventDefault();
+      let name = document.querySelector('#input-name').value;
+      let email = document.querySelector('#input-email').value;
+      let password = document.querySelector('#input-password').value;
+      //console.log({username,password});
+
+      const user = await FireBaseSignUp(name,email,password);
+      saveUserToLocalStorage(user);
+      navigate('/camps',{replace:true});
+
+      
+      
+    } catch (error) {
+      console.log(error);
+    }
   }
   return (
     <section className='md:flex md:w-full md:h-screen'>
@@ -21,8 +37,13 @@ function SignUp() {
       <form onSubmit={e => handleSubmit(e)} className="flex flex-col mt-12">
 
         <div className='grid'>
-          <label>Username</label>
-          <input className='bg-gray-100 p-2 rounded-md text-lg' type="text" id='input-username' />
+          <label>Name</label>
+          <input className='bg-gray-100 p-2 rounded-md text-lg' type="text" id='input-name' />
+        </div>
+
+        <div className='grid'>
+          <label>Email</label>
+          <input className='bg-gray-100 p-2 rounded-md text-lg' type="text" id='input-email' />
         </div>
 
         <div className='grid'>
