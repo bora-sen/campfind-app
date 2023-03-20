@@ -1,5 +1,5 @@
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile } from 'firebase/auth';
-import { collection, doc, getDocs, query, setDoc, updateDoc } from 'firebase/firestore';
+import { addDoc, collection, doc, getDoc, getDocs, query, setDoc, updateDoc } from 'firebase/firestore';
 import { uuidv4 } from '@firebase/util';
 
 import {auth,db} from './index';
@@ -40,10 +40,10 @@ export async function createCampground(user,campgroundObj){
             placeholderImg:campgroundObj.placeholderImg,
             price:campgroundObj.price,
             userId:user.uid,
-            userName:user.email,
+            userName:user.displayName,
             comments:[]
         }
-        let resp = await setDoc(doc(db,"campgrounds",newId),newCampground);
+        let resp = await setDoc(doc(db,"campgrounds",newCampground._id.toString()),newCampground)
         console.log(resp);
     } catch (error) {
         console.log(error);
@@ -74,13 +74,10 @@ export async function getAllCampgrounds(){
 }
 export async function getCampgroundById(campgroundId){
     try {
-        const q = query(campgroundsRef,{_id:campgroundId});
-        const camps = [];
-        const requestSnapshot = await getDocs(q);
-        requestSnapshot.forEach((camp) => {
-            camps.push(camp.data());
-        })
-        return camps[0]
+        const q = query(doc(db,"campgrounds",campgroundId.toString()));
+        const resp = await getDoc(q);
+        const camp = resp.data();
+        return resp.data()
     } catch (error) {
         console.log(error);
     }
