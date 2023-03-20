@@ -9,7 +9,6 @@ export default function CampCardList() {
   async function getCamps(){
     try{
       const Camps = await getAllCampgrounds();
-      //console.log(Camps);
       setCamps(Camps)
     }catch(err){
       console.log(err);
@@ -18,11 +17,10 @@ export default function CampCardList() {
 
   useEffect(() => {
     getCamps()
-    console.log(camps);
   },[])
 
   return (
-    <div className='flex gap-4 flex-wrap p-4'>
+    <div className='flex gap-4 flex-wrap p-4 my-12'>
       {
         camps.map((camp,index) => {
           return <CampCard key={index} camp_object={camp} />
