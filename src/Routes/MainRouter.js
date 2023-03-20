@@ -17,7 +17,10 @@ function MainRouter() {
         <Route path='/sign-up' element={<Pages.SignUp />} />
         <Route path='/camps' element={<Pages.Explore />} />
         <Route path='/camp/:id' element={<Pages.Campground />} />
-        <Route path='/create/campground' element={<Pages.AddCampground />} />
+
+        <Route path='/add/campground' element={
+          <UserSpesificPage user={user} isAuthEl={<Pages.AddCampground />} isNotAuthEl={<Navigate to="/camps" />} />
+        } />
     </Routes>
   )
 }
