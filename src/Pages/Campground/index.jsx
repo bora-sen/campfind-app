@@ -10,11 +10,13 @@ function Campground() {
 
   useEffect(() => {
     async function getCamp(){
-      setSelectedPost(await getCampgroundById(id.toString()));
+      let selected = await getCampgroundById(id.toString())
+      console.log(selected);
+      console.log(id);
+      setSelectedPost(selected)
     }
     getCamp();
-    console.log(sel_post);
-  },[id])
+  },[])
 
 
 
@@ -29,7 +31,7 @@ function Campground() {
           <h3 className='font-semibold text-xl mr-4'>{`$${sel_post.price}/night`}</h3>
         </div>
         <span className='leading-7'>{sel_post.disc}</span>
-        <Comments comments={sel_post.comments} />
+        <Comments campground={sel_post} />
       </div>
     </Layout>
   )
