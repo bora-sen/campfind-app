@@ -1,6 +1,6 @@
-import React from 'react'
-import Layout from '../../Layout'
-import * as Comps from './Components'
+import React from "react";
+import Layout from "../../Layout";
+import * as Comps from "./Components";
 
 function Explore() {
   return (
@@ -8,7 +8,7 @@ function Explore() {
       <Comps.Hero />
       <Comps.CampCardList />
     </Layout>
-  )
+  );
 }
 
-export default Explore
+export default Explore;

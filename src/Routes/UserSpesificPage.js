@@ -1,10 +1,9 @@
-function UserSpesificPage({user,isAuthEl,isNotAuthEl}) {
-  if(user){
-    return isAuthEl
-  }
-  else {
-    return isNotAuthEl
+function UserSpesificPage({ user, isAuthEl, isNotAuthEl }) {
+  if (user) {
+    return isAuthEl;
+  } else {
+    return isNotAuthEl;
   }
 }
 
-export default UserSpesificPage
+export default UserSpesificPage;

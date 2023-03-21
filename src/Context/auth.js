@@ -2,36 +2,30 @@ import { createContext, useState } from "react";
 
 export const authContext = createContext();
 
+export default function AuthProvider({ children }) {
+  function getFromLocal() {
+    return JSON.parse(localStorage.getItem("user"));
+  }
+  function saveToLocal(val) {
+    localStorage.setItem("user", JSON.stringify(val));
+  }
 
-export default function AuthProvider({children}){
+  const [user, setUser] = useState(getFromLocal() ?? false);
 
-    function getFromLocal(){
-        return JSON.parse(localStorage.getItem('user'));
-    }
-    function saveToLocal(val){
-        localStorage.setItem("user",JSON.stringify(val));
-    }
+  function saveUserToLocalStorage(userInput) {
+    saveToLocal(userInput);
+    setUser(userInput);
+    console.log(userInput);
+  }
 
-    const [user,setUser] = useState(getFromLocal() ?? false);
+  function deleteUserFromLocalStorage() {
+    localStorage.removeItem("user");
+  }
+  const data = {
+    user,
+    saveUserToLocalStorage,
+    deleteUserFromLocalStorage,
+  };
 
-    function saveUserToLocalStorage(userInput){
-        saveToLocal(userInput)
-        setUser(userInput);
-        console.log(userInput);
-    }
-
-    function deleteUserFromLocalStorage(){
-        localStorage.removeItem('user');
-    }
-    const data = {
-        user,
-        saveUserToLocalStorage,
-        deleteUserFromLocalStorage
-    }
-
-    return (
-        <authContext.Provider value={data}>
-            {children}
-        </authContext.Provider>
-    )
+  return <authContext.Provider value={data}>{children}</authContext.Provider>;
 }

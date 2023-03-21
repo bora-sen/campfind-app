@@ -1,15 +1,15 @@
-import React from 'react'
-import Header from './Header'
-import Footer from './Footer'
+import React from "react";
+import Header from "./Header";
+import Footer from "./Footer";
 
-function Layout({children}) {
+function Layout({ children }) {
   return (
-    <main className='container mx-auto'>
+    <main className="container mx-auto">
       <Header />
       {children}
       <Footer />
     </main>
-  )
+  );
 }
 
-export default Layout
+export default Layout;
