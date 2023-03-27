@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 
 function Hero() {
   return (
-    <section className="flex flex-col mx-4 md:mx-0 md:w-full bg-primary-accent-pale bg-opacity-20 sm:h-[26rem] sm:justify-center sm:items-start mb-12 p-4 md:p-12">
+    <section className="flex flex-col mx-4 md:mx-0 md:w-full bg-explore-main bg-center bg-cover text-white sm:h-[26rem] sm:justify-center sm:items-start mb-12 p-4 md:p-12">
       <div className="text-start grid gap-4 sm:w-[30rem]">
         <span className="font-bold text-5xl sm:text-6xl">
           Welcome to campFind!
@@ -14,7 +14,7 @@ function Hero() {
         </span>
         <div className="flex flex-col md:flex-row gap-2">
           <input
-            className="w-full p-4 rounded-md border-gray-300 border-2 placeholder:text-lg"
+            className="w-full p-4 rounded-md border-gray-300 border-2 placeholder:text-lg text-primary-black"
             type="text"
             placeholder="Search for camps"
           />

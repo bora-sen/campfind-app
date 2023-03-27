@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { authContext } from "../../Context/auth";
-import Layout from "../../Layout";
+import { MainLayout } from "../../Layouts";
 import { createCampground as firebaseAddCg } from "../../Firebase/controller";
 import { useNavigate } from "react-router-dom";
 
@@ -28,7 +28,7 @@ function AddCampground() {
     navigate("/camps", { replace: true });
   }
   return (
-    <Layout>
+    <MainLayout>
       <section className="p-4 sm:w-[45rem] sm:block sm:mx-auto">
         <div className="w-[25rem] mb-4">
           <span className="font-bold text-5xl">Add New Campground</span>
@@ -77,7 +77,7 @@ function AddCampground() {
           </div>
         </form>
       </section>
-    </Layout>
+    </MainLayout>
   );
 }
 

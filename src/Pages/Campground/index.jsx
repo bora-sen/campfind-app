@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getCampgroundById } from "../../Firebase/controller";
-import Layout from "../../Layout";
+import { MainLayout } from "../../Layouts";
 import Comments from "./Comments";
 
 function Campground() {
@@ -11,8 +11,8 @@ function Campground() {
   useEffect(() => {
     async function getCamp() {
       let selected = await getCampgroundById(id.toString());
-      console.log(selected);
-      console.log(id);
+      //console.log(selected);
+      //console.log(id);
       setSelectedPost(selected);
     }
     getCamp();
@@ -23,7 +23,7 @@ function Campground() {
   }
 
   return (
-    <Layout>
+    <MainLayout>
       <div className="p-4">
         <img className="w-full" src={sel_post.placeholderImg} alt="" />
         <div className="flex items-center justify-between">
@@ -33,7 +33,7 @@ function Campground() {
         <span className="leading-7">{sel_post.disc}</span>
         <Comments campground={sel_post} />
       </div>
-    </Layout>
+    </MainLayout>
   );
 }
 
