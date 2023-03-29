@@ -20,7 +20,7 @@ export default function CampCardList() {
   }, []);
 
   return (
-    <div className="flex gap-4 flex-wrap p-4 my-12">
+    <div className="flex gap-4 flex-wrap p-4 my-12 justify-center">
       {camps.map((camp, index) => {
         return <CampCard key={index} camp_object={camp} />;
       })}
