@@ -12,6 +12,9 @@ module.exports = {
         "primary-danger":"#DD2E00"
       }
     },
+    backgroundImage:{
+      "explore-main":"url('/src/Assets/explore-placeholder.jpg')"
+    }
   },
   plugins: [],
 }
