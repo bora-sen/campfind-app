@@ -14,7 +14,7 @@ function Header() {
     try {
       await SignOut()
       deleteUserFromLocalStorage()
-      navigate("/")
+      navigate(0, { replace: false })
     } catch (error) {
       console.log(error)
     }
