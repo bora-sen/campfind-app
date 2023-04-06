@@ -1,22 +1,22 @@
-import React, { useContext } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
-import { authContext } from "../../../Context/auth";
+import React, { useContext } from "react"
+import { NavLink, useNavigate } from "react-router-dom"
+import { authContext } from "../../../Context/auth"
 
-import { SignOut } from "../../../Firebase/controller";
+import { SignOut } from "../../../Firebase/controller"
 
 function Header() {
-  const { user, deleteUserFromLocalStorage } = useContext(authContext);
-  const navigate = useNavigate();
+  const { user, deleteUserFromLocalStorage } = useContext(authContext)
+  const navigate = useNavigate()
 
   async function handleSignOut(e) {
-    e.preventDefault();
+    e.preventDefault()
 
     try {
-      await SignOut();
-      deleteUserFromLocalStorage();
-      navigate(0);
+      await SignOut()
+      deleteUserFromLocalStorage()
+      navigate("/")
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   }
   return (
@@ -52,11 +52,7 @@ function Header() {
             <NavLink replace to="/sign-in" className="font-bold text-gray-400">
               Login
             </NavLink>
-            <NavLink
-              replace
-              to="/sign-up"
-              className="font-bold text-white bg-primary-black p-4"
-            >
+            <NavLink replace to="/sign-up" className="font-bold text-white bg-primary-black p-4">
               Create an account
             </NavLink>
           </>
@@ -68,7 +64,7 @@ function Header() {
         )}
       </div>
     </nav>
-  );
+  )
 }
 
-export default Header;
+export default Header
